@@ -1,0 +1,6 @@
+# File konfigurasi OS
+.DS_Store
+Thumbs.db
+
+# File yang ingin disembunyikan (misal jika ada file reset yang belum dihapus)
+reset.php
