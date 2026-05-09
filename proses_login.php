@@ -2,6 +2,22 @@
 session_start();
 require 'config/koneksi.php';
 
+// ==========================================
+// 1. LOGIKA LOGOUT
+// ==========================================
+if (isset($_GET['logout']) && $_GET['logout'] == 'true') {
+    // Hapus semua data sesi
+    session_unset();
+    session_destroy();
+    
+    // Arahkan kembali ke halaman form login
+    header("Location: login.php");
+    exit;
+}
+
+// ==========================================
+// 2. LOGIKA LOGIN
+// ==========================================
 if (isset($_POST['login'])) {
     $identitas = trim($_POST['identitas']);
     $password = trim($_POST['password']);
@@ -26,13 +42,14 @@ if (isset($_POST['login'])) {
         }
         exit;
     } else {
-        // Jika gagal, kembalikan ke index dengan alert
+        // PERBAIKAN: Jika gagal, kembalikan ke login.php, bukan index.php
         echo "<script>
             alert('Identitas atau Password salah!'); 
-            window.location.href='index.php';
+            window.location.href='login.php';
         </script>";
     }
 } else {
-    header("Location: index.php");
+    // Jika ada yang mencoba mengakses file ini langsung tanpa form
+    header("Location: login.php");
 }
 ?>
